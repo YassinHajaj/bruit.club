@@ -96,6 +96,31 @@
       display: flex;
       gap: 2rem;
       list-style: none;
+      align-items: center;
+    }
+
+    .language-switcher {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: 1rem;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn:hover,
+    .lang-btn.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
     }
 
     .nav-links a {
@@ -738,14 +763,21 @@
         <img src="bruit.png" alt="BRUIT Logo" class="floating">
         <span class="logo-text">BRUIT</span>
       </a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#join">Join Us</a></li>
-        </ul>
-      </nav>
+              <nav>
+          <ul class="nav-links">
+            <li><a href="#home" data-en="Home" data-fr="Accueil" data-nl="Home">Home</a></li>
+            <li><a href="#about" data-en="About" data-fr="À propos" data-nl="Over ons">About</a></li>
+            <li><a href="#features" data-en="Features" data-fr="Fonctionnalités" data-nl="Functies">Features</a></li>
+            <li><a href="#join" data-en="Join Us" data-fr="Rejoignez-nous" data-nl="Doe mee">Join Us</a></li>
+            <li>
+              <div class="language-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="nl">NL</button>
+              </div>
+            </li>
+          </ul>
+        </nav>
     </div>
   </header>
 
@@ -753,16 +785,16 @@
   <section class="hero" id="home">
     <div class="hero-content">
       <div class="hero-left">
-        <h1>Welcome to <span class="brand-highlight">BRUIT</span></h1>
-        <p>Brussels' premier IT community where innovation meets collaboration. Join passionate developers, engineers, and tech enthusiasts shaping the future of technology in the heart of Europe.</p>
+        <h1 data-en="Welcome to" data-fr="Bienvenue sur" data-nl="Welkom bij">Welcome to <span class="brand-highlight">BRUIT</span></h1>
+        <p data-en="Brussels' premier IT community where innovation meets collaboration. Join passionate developers, engineers, and tech enthusiasts shaping the future of technology in the heart of Europe." data-fr="La première communauté IT de Bruxelles où l'innovation rencontre la collaboration. Rejoignez des développeurs, ingénieurs et passionnés de technologie passionnés qui façonnent l'avenir de la technologie au cœur de l'Europe." data-nl="Brussels' toonaangevende IT-gemeenschap waar innovatie samenkomt met samenwerking. Sluit je aan bij gepassioneerde ontwikkelaars, ingenieurs en tech-enthousiastelingen die de toekomst van technologie in het hart van Europa vormgeven.">Brussels' premier IT community where innovation meets collaboration. Join passionate developers, engineers, and tech enthusiasts shaping the future of technology in the heart of Europe.</p>
         <div class="cta-buttons">
           <a href="https://discord.gg/ZzdU8cum" class="btn btn-primary" target="_blank">
             <i class="fab fa-discord"></i>
-            Join Our Discord
+            <span data-en="Join Our Discord" data-fr="Rejoignez notre Discord" data-nl="Doe mee met onze Discord">Join Our Discord</span>
           </a>
           <a href="#about" class="btn btn-secondary">
             <i class="fas fa-info-circle"></i>
-            Learn More
+            <span data-en="Learn More" data-fr="En savoir plus" data-nl="Meer weten">Learn More</span>
           </a>
         </div>
       </div>
@@ -782,22 +814,22 @@
   <!-- Features Section -->
   <section class="features" id="features">
     <div class="container">
-      <h2 class="section-title">Why Join BRUIT?</h2>
+      <h2 class="section-title" data-en="Why Join BRUIT?" data-fr="Pourquoi rejoindre BRUIT ?" data-nl="Waarom lid worden van BRUIT?">Why Join BRUIT?</h2>
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-users"></i>
+                  <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 data-en="Community First" data-fr="Communauté d'abord" data-nl="Gemeenschap eerst">Community First</h3>
+            <p data-en="Connect with like-minded IT professionals in Brussels. Share knowledge, collaborate on projects, and build lasting relationships." data-fr="Connectez-vous avec des professionnels IT partageant les mêmes idées à Bruxelles. Partagez vos connaissances, collaborez sur des projets et construisez des relations durables." data-nl="Maak contact met gelijkgestemde IT-professionals in Brussel. Deel kennis, werk samen aan projecten en bouw duurzame relaties op.">Connect with like-minded IT professionals in Brussels. Share knowledge, collaborate on projects, and build lasting relationships.</p>
           </div>
-          <h3>Community First</h3>
-          <p>Connect with like-minded IT professionals in Brussels. Share knowledge, collaborate on projects, and build lasting relationships.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-lightbulb"></i>
+                  <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3 data-en="Innovation Hub" data-fr="Hub d'innovation" data-nl="Innovatiehub">Innovation Hub</h3>
+            <p data-en="Stay ahead of the curve with the latest tech trends, workshops, and networking events in the Belgian tech scene." data-fr="Restez à la pointe avec les dernières tendances technologiques, ateliers et événements de networking dans la scène tech belge." data-nl="Blijf voorop lopen met de nieuwste tech-trends, workshops en netwerkevenementen in de Belgische tech-scene.">Stay ahead of the curve with the latest tech trends, workshops, and networking events in the Belgian tech scene.</p>
           </div>
-          <h3>Innovation Hub</h3>
-          <p>Stay ahead of the curve with the latest tech trends, workshops, and networking events in the Belgian tech scene.</p>
-        </div>
         <div class="feature-card">
           <div class="feature-icon">
             <i class="fas fa-code"></i>
@@ -834,29 +866,29 @@
   <section class="about" id="about">
     <div class="about-content">
       <div class="about-text">
-        <h2>About BRUIT</h2>
-        <p>BRUIT (Brussels IT) is more than just a community—it's a movement. We bring together passionate minds in technology to create, innovate, and inspire.</p>
-        <p>Founded in the heart of Brussels, we serve as a hub for IT professionals, developers, designers, and tech enthusiasts who are passionate about building the future.</p>
-        <p>Whether you're a seasoned developer or just starting your tech journey, BRUIT provides the perfect environment to learn, grow, and connect with fellow professionals.</p>
+        <h2 data-en="About BRUIT" data-fr="À propos de BRUIT" data-nl="Over BRUIT">About BRUIT</h2>
+        <p data-en="BRUIT (Brussels IT) is more than just a community—it's a movement. We bring together passionate minds in technology to create, innovate, and inspire." data-fr="BRUIT (Brussels IT) est plus qu'une simple communauté—c'est un mouvement. Nous rassemblons des esprits passionnés de technologie pour créer, innover et inspirer." data-nl="BRUIT (Brussels IT) is meer dan alleen een gemeenschap—het is een beweging. We brengen gepassioneerde geesten in technologie samen om te creëren, innoveren en inspireren.">BRUIT (Brussels IT) is more than just a community—it's a movement. We bring together passionate minds in technology to create, innovate, and inspire.</p>
+        <p data-en="Founded in the heart of Brussels, we serve as a hub for IT professionals, developers, designers, and tech enthusiasts who are passionate about building the future." data-fr="Fondée au cœur de Bruxelles, nous servons de hub pour les professionnels IT, développeurs, designers et passionnés de technologie qui sont passionnés par la construction de l'avenir." data-nl="Opgericht in het hart van Brussel, dienen we als hub voor IT-professionals, ontwikkelaars, designers en tech-enthousiastelingen die gepassioneerd zijn over het bouwen van de toekomst.">Founded in the heart of Brussels, we serve as a hub for IT professionals, developers, designers, and tech enthusiasts who are passionate about building the future.</p>
+        <p data-en="Whether you're a seasoned developer or just starting your tech journey, BRUIT provides the perfect environment to learn, grow, and connect with fellow professionals." data-fr="Que vous soyez un développeur expérimenté ou que vous commenciez votre parcours tech, BRUIT offre l'environnement parfait pour apprendre, grandir et vous connecter avec d'autres professionnels." data-nl="Of je nu een ervaren ontwikkelaar bent of net begint aan je tech-reis, BRUIT biedt de perfecte omgeving om te leren, te groeien en contact te maken met medeprofessionals.">Whether you're a seasoned developer or just starting your tech journey, BRUIT provides the perfect environment to learn, grow, and connect with fellow professionals.</p>
         
-        <div class="stats">
-          <div class="stat">
-            <span class="stat-number">Join</span>
-            <span class="stat-label">Early Members</span>
+                  <div class="stats">
+            <div class="stat">
+              <span class="stat-number" data-en="Join" data-fr="Rejoignez" data-nl="Doe mee">Join</span>
+              <span class="stat-label" data-en="Early Members" data-fr="Premiers membres" data-nl="Vroege leden">Early Members</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" data-en="Coming" data-fr="Bientôt" data-nl="Komt">Coming</span>
+              <span class="stat-label" data-en="Events Soon" data-fr="Événements bientôt" data-nl="Evenementen binnenkort">Events Soon</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" data-en="Growing" data-fr="En croissance" data-nl="Groeiend">Growing</span>
+              <span class="stat-label" data-en="Partnerships" data-fr="Partenariats" data-nl="Partnerships">Partnerships</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">24/7</span>
+              <span class="stat-label" data-en="Community" data-fr="Communauté" data-nl="Gemeenschap">Community</span>
+            </div>
           </div>
-          <div class="stat">
-            <span class="stat-number">Coming</span>
-            <span class="stat-label">Events Soon</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">Growing</span>
-            <span class="stat-label">Partnerships</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">24/7</span>
-            <span class="stat-label">Community</span>
-          </div>
-        </div>
       </div>
       <div class="about-visual">
         <img src="bruit.png" alt="BRUIT Community" style="width: 100%; max-width: 400px; height: auto; border-radius: 20px; box-shadow: var(--shadow-glow);">
@@ -867,14 +899,12 @@
   <!-- Join Section -->
   <section class="features" id="join" style="background: var(--bg-dark);">
     <div class="container">
-      <h2 class="section-title">Ready to Join?</h2>
+      <h2 class="section-title" data-en="Ready to Join?" data-fr="Prêt à nous rejoindre ?" data-nl="Klaar om mee te doen?">Ready to Join?</h2>
       <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;">
-          Be part of something special from the beginning! Join our Discord community and help shape the future of Brussels' IT scene.
-        </p>
+        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;" data-en="Be part of something special from the beginning! Join our Discord community and help shape the future of Brussels' IT scene." data-fr="Faites partie de quelque chose de spécial dès le début ! Rejoignez notre communauté Discord et aidez à façonner l'avenir de la scène IT bruxelloise." data-nl="Maak deel uit van iets bijzonders vanaf het begin! Doe mee met onze Discord-gemeenschap en help de toekomst van de Brusselse IT-scene vorm te geven.">Be part of something special from the beginning! Join our Discord community and help shape the future of Brussels' IT scene.</p>
         <a href="https://discord.gg/ZzdU8cum" class="btn btn-primary" target="_blank" style="font-size: 1.2rem; padding: 1.5rem 3rem;">
           <i class="fab fa-discord"></i>
-          Join BRUIT on Discord
+          <span data-en="Join BRUIT on Discord" data-fr="Rejoignez BRUIT sur Discord" data-nl="Doe mee met BRUIT op Discord">Join BRUIT on Discord</span>
         </a>
       </div>
     </div>
@@ -887,9 +917,7 @@
         <img src="bruit.png" alt="BRUIT Logo">
         <span class="logo-text">BRUIT</span>
       </div>
-      <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">
-        Brussels' premier IT community for innovation, collaboration, and growth. Building the future together.
-      </p>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;" data-en="Brussels' premier IT community for innovation, collaboration, and growth. Building the future together." data-fr="La première communauté IT de Bruxelles pour l'innovation, la collaboration et la croissance. Construisons l'avenir ensemble." data-nl="Brussels' toonaangevende IT-gemeenschap voor innovatie, samenwerking en groei. Samen de toekomst bouwen.">Brussels' premier IT community for innovation, collaboration, and growth. Building the future together.</p>
       <div class="social-links">
         <a href="https://discord.gg/ZzdU8cum" class="social-link" target="_blank" title="Join our Discord">
           <i class="fab fa-discord"></i>
@@ -902,6 +930,54 @@
   </footer>
 
   <script>
+    // Language switching functionality
+    let currentLang = 'en';
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      
+      // Update language buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.lang === lang) {
+          btn.classList.add('active');
+        }
+      });
+
+      // Update all translatable elements
+      document.querySelectorAll('[data-' + lang + ']').forEach(element => {
+        if (element.tagName === 'INPUT' && element.type === 'placeholder') {
+          element.placeholder = element.dataset[lang];
+        } else {
+          element.textContent = element.dataset[lang];
+        }
+      });
+
+      // Update page title
+      const titles = {
+        'en': 'BRUIT - Brussels IT Community',
+        'fr': 'BRUIT - Communauté IT de Bruxelles',
+        'nl': 'BRUIT - Brusselse IT-gemeenschap'
+      };
+      document.title = titles[lang];
+
+      // Save language preference
+      localStorage.setItem('bruit-lang', lang);
+    }
+
+    // Initialize language switcher
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchLanguage(btn.dataset.lang);
+      });
+    });
+
+    // Load saved language preference
+    const savedLang = localStorage.getItem('bruit-lang');
+    if (savedLang) {
+      switchLanguage(savedLang);
+    }
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
