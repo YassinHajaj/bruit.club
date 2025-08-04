@@ -341,51 +341,67 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   
   <script>
-    // Blog posts data
-    const blogPosts = [
-      {
-        title: "Welcome to BRUIT.club",
-        date: "August 5, 2025",
-        excerpt: "We're live! BRUIT — short for BRUssels IT — is a community space for coders, creatives, and curious minds in Brussels.",
-        content: `# 👋 Welcome to BRUIT.club
+        // Blog posts data - loaded from markdown files
+    let blogPosts = [];
 
-We're live!
-
-**BRUIT** — short for _BRUssels IT_ — is a community space for coders, creatives, and curious minds in Brussels.
-
-Whether you're into **software development**, **AI**, **digital culture**, or just love building cool things with tech, you've found the right place.
-
-## 💡 What is BRUIT.club?
-
-A playground. A blog. A collective.  
-A noisy place for bright ideas.  
-Expect:
-
-- 🔧 Tools and tips for devs
-- 🧠 Thoughts on technology and society
-- 🎨 Creative coding and open source experiments
-- 💬 Events, meetups, and projects from Brussels & beyond
-
-## 🎯 Why this blog?
-
-To **share**, to **connect**, and to **document**.  
-This blog is our notebook — raw, opinionated, and evolving.  
-Sometimes polished, sometimes chaotic — just like BRUIT itself.
-
-## 🫱🏽‍🫲🏼 Want to join?
-
-We're just getting started.  
-Got an idea? Want to write? Want to collaborate?
-
-📧 Drop us a line or [join the Discord](https://discord.gg/ZzdU8cum).
-Let's make some BRUIT together.
-
----
-
-Welcome aboard. 🚀  
-— The BRUIT.club team`
+    // Function to parse frontmatter and content from markdown
+    function parseMarkdownPost(markdown) {
+      const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+      const match = markdown.match(frontmatterRegex);
+      
+      if (!match) {
+        return null;
       }
-    ];
+      
+      const frontmatter = match[1];
+      const content = match[2];
+      
+      // Parse frontmatter
+      const titleMatch = frontmatter.match(/title:\s*"([^"]*)"/);
+      const dateMatch = frontmatter.match(/date:\s*"([^"]*)"/);
+      const excerptMatch = frontmatter.match(/excerpt:\s*"([^"]*)"/);
+      
+      return {
+        title: titleMatch ? titleMatch[1] : 'Untitled',
+        date: dateMatch ? dateMatch[1] : 'No date',
+        excerpt: excerptMatch ? excerptMatch[1] : '',
+        content: content.trim()
+      };
+    }
+
+    // Function to load blog posts from markdown files
+    async function loadBlogPostsFromFiles() {
+      const postFiles = [
+        'posts/welcome-to-bruit-club.md'
+        // Add more posts here as you create them
+      ];
+      
+      try {
+        const posts = [];
+        for (const file of postFiles) {
+          const response = await fetch(file);
+          if (response.ok) {
+            const markdown = await response.text();
+            const post = parseMarkdownPost(markdown);
+            if (post) {
+              posts.push(post);
+            }
+          }
+        }
+        
+        // Sort posts by date (newest first)
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        blogPosts = posts;
+        
+        // Load the blog posts in the UI
+        loadBlogPosts();
+      } catch (error) {
+        console.error('Error loading blog posts:', error);
+        // Fallback to empty array
+        blogPosts = [];
+        loadBlogPosts();
+      }
+    }
 
     // Language switching functionality
     let currentLang = 'en';
@@ -457,7 +473,7 @@ Welcome aboard. 🚀
     }
 
     // Load blog posts when page loads
-    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+    document.addEventListener('DOMContentLoaded', loadBlogPostsFromFiles);
   </script>
 </body>
 </html> 
