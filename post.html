@@ -43,6 +43,7 @@
       background: var(--bg-dark);
       color: var(--text-primary);
       line-height: 1.6;
+      min-height: 100vh;
     }
 
     /* Header */
@@ -52,10 +53,12 @@
       border-bottom: 1px solid var(--border-color);
       position: fixed;
       top: 0;
-      width: 100%;
+      left: 0;
+      right: 0;
       z-index: 1000;
-      transition: all 0.3s ease;
       min-height: 80px;
+      display: block;
+      visibility: visible;
     }
 
     .header-container {
@@ -65,6 +68,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      visibility: visible;
+      opacity: 1;
     }
 
     .logo {
@@ -100,6 +105,8 @@
       gap: 2rem;
       list-style: none;
       align-items: center;
+      visibility: visible;
+      opacity: 1;
     }
 
     .nav-links a {
@@ -156,9 +163,9 @@
     /* Main content */
     main {
       margin-top: 80px;
-      padding: 6rem 2rem;
+      padding: 2rem;
+      min-height: calc(100vh - 80px);
       background: var(--bg-darker);
-      min-height: 100vh;
     }
 
     .container {
@@ -181,23 +188,7 @@
       color: var(--primary-hover);
     }
 
-    .post-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
 
-    .post-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-      line-height: 1.2;
-    }
-
-    .post-meta {
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
 
     .post-content {
       background: var(--bg-card);
@@ -205,8 +196,11 @@
       padding: 3rem;
       line-height: 1.7;
       color: var(--text-secondary);
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
+    /* Markdown content styling */
     .post-content h1,
     .post-content h2,
     .post-content h3,
@@ -216,10 +210,12 @@
       color: var(--text-primary);
       margin-top: 2rem;
       margin-bottom: 1rem;
+      font-weight: 600;
     }
 
     .post-content h1 {
       font-size: 2rem;
+      margin-top: 0;
     }
 
     .post-content h2 {
@@ -232,6 +228,7 @@
 
     .post-content p {
       margin-bottom: 1.5rem;
+      color: var(--text-secondary);
     }
 
     .post-content ul,
@@ -242,6 +239,33 @@
 
     .post-content li {
       margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .post-content strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .post-content em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .post-content a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .post-content a:hover {
+      color: var(--primary-hover);
+    }
+
+    .post-content hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 2rem 0;
     }
 
     .post-content blockquote {
@@ -258,6 +282,7 @@
       border-radius: 4px;
       font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
       font-size: 0.9rem;
+      color: var(--text-primary);
     }
 
     .post-content pre {
@@ -273,16 +298,6 @@
       padding: 0;
     }
 
-    .post-content a {
-      color: var(--primary-color);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .post-content a:hover {
-      color: var(--primary-hover);
-    }
-
     .post-content img {
       max-width: 100%;
       height: auto;
@@ -290,18 +305,23 @@
       margin: 2rem 0;
     }
 
-    .post-content strong {
-      color: var(--text-primary);
-    }
-
     /* Responsive Design */
     @media (max-width: 768px) {
+      header {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      
       .header-container {
         flex-direction: column;
         gap: 1rem;
-        padding: 1.5rem 1rem;
+        padding: 1rem;
         min-height: 80px;
         justify-content: center;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
 
       .nav-links {
@@ -310,26 +330,51 @@
         justify-content: center;
       }
 
+      main {
+        padding: 1rem;
+        margin-top: 80px;
+      }
+
       .post-content {
         padding: 2rem;
       }
 
-      .post-title {
-        font-size: 2rem;
-      }
+
     }
 
     @media (max-width: 480px) {
       .nav-links {
         font-size: 0.9rem;
       }
+
+      main {
+        padding: 0.5rem;
+      }
+
+      .post-content {
+        padding: 1.5rem;
+      }
+
+
+
+      .post-content h1 {
+        font-size: 1.5rem;
+      }
+
+      .post-content h2 {
+        font-size: 1.25rem;
+      }
+
+      .post-content h3 {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
-    <div class="header-container">
+  <header style="display: block !important; visibility: visible !important; opacity: 1 !important; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; background: rgba(15, 15, 35, 0.95) !important; backdrop-filter: blur(10px) !important; border-bottom: 1px solid #27272a !important; min-height: 80px !important;">
+    <div class="header-container" style="display: flex !important; visibility: visible !important; opacity: 1 !important;">
       <a href="index.html" class="logo">
         <img src="bruit.png" alt="BRUIT Logo">
         <span class="logo-text">BRUIT</span>
@@ -358,7 +403,7 @@
     <div class="container">
       <a href="blog.html" class="back-link">
         <i class="fas fa-arrow-left"></i>
-        <span data-en="← Back to Blog" data-fr="← Retour au blog" data-nl="← Terug naar blog">← Back to Blog</span>
+        <span data-en="Back to Blog" data-fr="Retour au blog" data-nl="Terug naar blog">Back to Blog</span>
       </a>
       
       <div id="post-content">
@@ -472,10 +517,6 @@ Welcome aboard. 🚀
           // Create post content
           const postContainer = document.getElementById('post-content');
           postContainer.innerHTML = `
-            <header class="post-header">
-              <h1 class="post-title">${post.title}</h1>
-              <div class="post-meta">${post.date}</div>
-            </header>
             <article class="post-content">
               ${marked.parse(post.content)}
             </article>
@@ -507,7 +548,25 @@ Welcome aboard. 🚀
     }
 
     // Load blog post when page loads
-    document.addEventListener('DOMContentLoaded', loadBlogPost);
+    document.addEventListener('DOMContentLoaded', function() {
+      loadBlogPost();
+      
+      // Debug: Ensure header is visible
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.display = 'block';
+        header.style.visibility = 'visible';
+        header.style.opacity = '1';
+        header.style.position = 'fixed';
+        header.style.top = '0';
+        header.style.left = '0';
+        header.style.right = '0';
+        header.style.zIndex = '1000';
+        console.log('Header should be visible now');
+      } else {
+        console.log('Header not found!');
+      }
+    });
   </script>
 </body>
 </html> 
