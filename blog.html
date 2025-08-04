@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - BRUIT - Brussels IT Community</title>
+  
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#6366f1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #6366f1;
+      --primary-hover: #4f46e5;
+      --bg-dark: #0f0f23;
+      --bg-darker: #0a0a1a;
+      --bg-card: #1a1a2e;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --border-color: #27272a;
+      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: rgba(15, 15, 35, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      min-height: 80px;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5));
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .language-switcher {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: 1rem;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn:hover,
+    .lang-btn.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    /* Main content */
+    main {
+      margin-top: 80px;
+      padding: 6rem 2rem;
+      background: var(--bg-darker);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      font-size: 1.2rem;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .blog-card-content {
+      padding: 2rem;
+    }
+
+    .blog-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .blog-card p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .blog-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .blog-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .blog-link:hover {
+      color: var(--primary-hover);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--primary-hover);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem 1rem;
+        min-height: 80px;
+        justify-content: center;
+      }
+
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .blog-card-content {
+        padding: 1.5rem;
+      }
+
+      .page-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <img src="bruit.png" alt="BRUIT Logo">
+        <span class="logo-text">BRUIT</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" data-en="Home" data-fr="Accueil" data-nl="Home">Home</a></li>
+          <li><a href="index.html#about" data-en="About" data-fr="À propos" data-nl="Over ons">About</a></li>
+          <li><a href="index.html#features" data-en="Features" data-fr="Fonctionnalités" data-nl="Functies">Features</a></li>
+          <li><a href="blog.html" data-en="Blog" data-fr="Blog" data-nl="Blog">Blog</a></li>
+          <li><a href="index.html#join" data-en="Join Us" data-fr="Rejoignez-nous" data-nl="Doe mee">Join Us</a></li>
+          <li>
+            <div class="language-switcher">
+              <button class="lang-btn active" data-lang="en">EN</button>
+              <button class="lang-btn" data-lang="fr">FR</button>
+              <button class="lang-btn" data-lang="nl">NL</button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <a href="index.html" class="back-link">
+        <i class="fas fa-arrow-left"></i>
+        <span data-en="Back to Home" data-fr="Retour à l'accueil" data-nl="Terug naar home">Back to Home</span>
+      </a>
+      
+      <h1 class="page-title" data-en="BRUIT Blog" data-fr="Blog BRUIT" data-nl="BRUIT Blog">BRUIT Blog</h1>
+      <p class="page-subtitle" data-en="Latest insights, updates, and stories from the Brussels IT community" data-fr="Dernières actualités, mises à jour et histoires de la communauté IT bruxelloise" data-nl="Laatste inzichten, updates en verhalen van de Brusselse IT-gemeenschap">Latest insights, updates, and stories from the Brussels IT community</p>
+      
+      <div id="blog-posts" class="blog-grid">
+        <!-- Blog posts will be loaded here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Markdown.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <script>
+    // Blog posts data
+    const blogPosts = [
+      {
+        title: "Welcome to BRUIT.club",
+        date: "August 5, 2025",
+        excerpt: "We're live! BRUIT — short for BRUssels IT — is a community space for coders, creatives, and curious minds in Brussels.",
+        content: `# 👋 Welcome to BRUIT.club
+
+We're live!
+
+**BRUIT** — short for _BRUssels IT_ — is a community space for coders, creatives, and curious minds in Brussels.
+
+Whether you're into **software development**, **AI**, **digital culture**, or just love building cool things with tech, you've found the right place.
+
+## 💡 What is BRUIT.club?
+
+A playground. A blog. A collective.  
+A noisy place for bright ideas.  
+Expect:
+
+- 🔧 Tools and tips for devs
+- 🧠 Thoughts on technology and society
+- 🎨 Creative coding and open source experiments
+- 💬 Events, meetups, and projects from Brussels & beyond
+
+## 🎯 Why this blog?
+
+To **share**, to **connect**, and to **document**.  
+This blog is our notebook — raw, opinionated, and evolving.  
+Sometimes polished, sometimes chaotic — just like BRUIT itself.
+
+## 🫱🏽‍🫲🏼 Want to join?
+
+We're just getting started.  
+Got an idea? Want to write? Want to collaborate?
+
+📧 Drop us a line or [join the Discord](https://discord.gg/ZzdU8cum).
+Let's make some BRUIT together.
+
+---
+
+Welcome aboard. 🚀  
+— The BRUIT.club team`
+      }
+    ];
+
+    // Language switching functionality
+    let currentLang = 'en';
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      
+      // Update language buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.lang === lang) {
+          btn.classList.add('active');
+        }
+      });
+
+      // Update all translatable elements
+      document.querySelectorAll('[data-' + lang + ']').forEach(element => {
+        if (element.tagName === 'INPUT' && element.type === 'placeholder') {
+          element.placeholder = element.dataset[lang];
+        } else {
+          element.textContent = element.dataset[lang];
+        }
+      });
+
+      // Update page title
+      const titles = {
+        'en': 'Blog - BRUIT - Brussels IT Community',
+        'fr': 'Blog - BRUIT - Communauté IT de Bruxelles',
+        'nl': 'Blog - BRUIT - Brusselse IT-gemeenschap'
+      };
+      document.title = titles[lang];
+
+      // Save language preference
+      localStorage.setItem('bruit-lang', lang);
+    }
+
+    // Initialize language switcher
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchLanguage(btn.dataset.lang);
+      });
+    });
+
+    // Load saved language preference
+    const savedLang = localStorage.getItem('bruit-lang');
+    if (savedLang) {
+      switchLanguage(savedLang);
+    }
+
+    // Blog functionality
+    function loadBlogPosts() {
+      const blogContainer = document.getElementById('blog-posts');
+      
+      blogPosts.forEach((post, index) => {
+        const postElement = document.createElement('article');
+        postElement.className = 'blog-card';
+        postElement.innerHTML = `
+          <div class="blog-card-content">
+            <h3><a href="post.html?title=${encodeURIComponent(post.title)}" class="blog-link">${post.title}</a></h3>
+            <p>${post.excerpt}</p>
+            <div class="blog-meta">
+              <span>${post.date}</span>
+              <a href="post.html?title=${encodeURIComponent(post.title)}" class="blog-link" data-en="Read More" data-fr="Lire plus" data-nl="Lees meer">Read More</a>
+            </div>
+          </div>
+        `;
+        blogContainer.appendChild(postElement);
+      });
+    }
+
+    // Load blog posts when page loads
+    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+  </script>
+</body>
+</html> 

@@ -752,6 +752,69 @@
       }
     }
 
+    /* Blog styles */
+    .blog-section {
+      padding: 6rem 2rem;
+      background: var(--bg-darker);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .blog-card-content {
+      padding: 2rem;
+    }
+
+    .blog-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .blog-card p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .blog-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .blog-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .blog-link:hover {
+      color: var(--primary-hover);
+    }
+
     /* Scroll indicator */
     .scroll-indicator {
       position: fixed;
@@ -789,6 +852,7 @@
             <li><a href="#home" data-en="Home" data-fr="Accueil" data-nl="Home">Home</a></li>
             <li><a href="#about" data-en="About" data-fr="À propos" data-nl="Over ons">About</a></li>
             <li><a href="#features" data-en="Features" data-fr="Fonctionnalités" data-nl="Functies">Features</a></li>
+            <li><a href="blog.html" data-en="Blog" data-fr="Blog" data-nl="Blog">Blog</a></li>
             <li><a href="#join" data-en="Join Us" data-fr="Rejoignez-nous" data-nl="Doe mee">Join Us</a></li>
             <li>
               <div class="language-switcher">
@@ -917,6 +981,19 @@
     </div>
   </section>
 
+  <!-- Blog Section -->
+  <section class="blog-section" id="blog">
+    <div class="container">
+      <h2 class="section-title" data-en="Latest from BRUIT" data-fr="Dernières nouvelles de BRUIT" data-nl="Laatste van BRUIT">Latest from BRUIT</h2>
+      <div id="blog-posts" class="blog-grid">
+        <!-- Blog posts will be loaded here -->
+      </div>
+      <div style="text-align: center; margin-top: 3rem;">
+        <button id="load-more-posts" class="btn btn-secondary" data-en="Load More Posts" data-fr="Charger plus d'articles" data-nl="Meer berichten laden" style="display: none;">Load More Posts</button>
+      </div>
+    </div>
+  </section>
+
   <!-- Join Section -->
   <section class="features" id="join" style="background: var(--bg-dark);">
     <div class="container">
@@ -950,7 +1027,56 @@
     </div>
   </footer>
 
+  <!-- Markdown.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
   <script>
+    // Blog posts data
+    const blogPosts = [
+      {
+        title: "Welcome to BRUIT - Brussels' Premier IT Community",
+        date: "January 15, 2025",
+        excerpt: "We're excited to announce the launch of BRUIT, Brussels' newest and most vibrant IT community. Join us as we build the future of technology in the heart of Europe.",
+        content: `# Welcome to BRUIT!
+
+We're thrilled to announce the official launch of **BRUIT** - Brussels' premier IT community where innovation meets collaboration.
+
+## What is BRUIT?
+
+BRUIT (Brussels IT) is a vibrant community founded in the heart of Brussels, serving as a hub for IT professionals, developers, designers, and tech enthusiasts who are passionate about building the future.
+
+## Why Join BRUIT?
+
+- **Community First**: Connect with like-minded IT professionals
+- **Innovation Hub**: Stay ahead with latest tech trends
+- **Skill Development**: Enhance your technical skills
+- **Career Growth**: Discover new opportunities
+
+[Read the full post →](#)`
+      },
+      {
+        title: "Building the Future of Brussels' Tech Scene",
+        date: "January 10, 2025",
+        excerpt: "Discover how BRUIT is creating an ecosystem where ideas flourish, skills develop, and careers grow in the heart of Europe's capital.",
+        content: `# Building the Future of Brussels' Tech Scene
+
+Brussels is becoming a hub for technology innovation, and BRUIT is at the center of this transformation.
+
+## Our Vision
+
+We believe that the best innovations come from collaboration and shared knowledge. By bringing together the brightest minds in Brussels' tech scene, we're creating an ecosystem where ideas flourish.
+
+## What's Next?
+
+- Regular meetups and workshops
+- Hackathons and coding events
+- Networking opportunities
+- Mentorship programs
+
+[Read the full post →](#)`
+      }
+    ];
+
     // Language switching functionality
     let currentLang = 'en';
 
@@ -1054,6 +1180,94 @@
       el.style.transform = 'translateY(20px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       observer.observe(el);
+    });
+
+    // Blog functionality
+    function loadBlogPosts() {
+      console.log('loadBlogPosts called');
+      const blogContainer = document.getElementById('blog-posts');
+      console.log('Blog container:', blogContainer);
+      const postsToShow = 3; // Show first 3 posts
+      
+      console.log('Number of posts to show:', postsToShow);
+      console.log('Blog posts array:', blogPosts);
+      
+      blogPosts.slice(0, postsToShow).forEach((post, index) => {
+        console.log(`Creating post ${index + 1}:`, post.title);
+        const postElement = document.createElement('article');
+        postElement.className = 'blog-card';
+        postElement.innerHTML = `
+          <div class="blog-card-content">
+            <h3><a href="post.html?title=${encodeURIComponent(post.title)}" class="blog-link">${post.title}</a></h3>
+            <p>${post.excerpt}</p>
+            <div class="blog-meta">
+              <span>${post.date}</span>
+              <a href="post.html?title=${encodeURIComponent(post.title)}" class="blog-link" data-en="Read More" data-fr="Lire plus" data-nl="Lees meer">Read More</a>
+            </div>
+          </div>
+        `;
+        blogContainer.appendChild(postElement);
+        console.log(`Post ${index + 1} added to container`);
+      });
+
+      // Show load more button if there are more posts
+      if (blogPosts.length > postsToShow) {
+        document.getElementById('load-more-posts').style.display = 'inline-flex';
+      }
+    }
+
+    function showBlogPost(title) {
+      const post = blogPosts.find(p => p.title === title);
+      if (post) {
+        // Create modal for blog post
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.8);
+          z-index: 10000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+        `;
+        
+        const content = document.createElement('div');
+        content.style.cssText = `
+          background: var(--bg-card);
+          border-radius: 16px;
+          padding: 2rem;
+          max-width: 800px;
+          max-height: 80vh;
+          overflow-y: auto;
+          position: relative;
+        `;
+        
+        content.innerHTML = `
+          <button onclick="this.closest('.modal').remove()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer;">×</button>
+          <h1 style="color: var(--text-primary); margin-bottom: 1rem;">${post.title}</h1>
+          <p style="color: var(--text-muted); margin-bottom: 2rem;">${post.date}</p>
+          <div style="color: var(--text-secondary); line-height: 1.7;">${marked.parse(post.content)}</div>
+        `;
+        
+        modal.className = 'modal';
+        modal.appendChild(content);
+        document.body.appendChild(modal);
+        
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) modal.remove();
+        });
+      }
+    }
+
+    // Load blog posts when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Loading blog posts...');
+      loadBlogPosts();
     });
   </script>
 </body>
