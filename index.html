@@ -50,6 +50,11 @@
       scroll-behavior: smooth;
     }
 
+    /* Section scroll offset for fixed header */
+    section[id] {
+      scroll-margin-top: 120px;
+    }
+
     /* Header */
     header {
       background: rgba(15, 15, 35, 0.95);
@@ -579,14 +584,14 @@
       }
 
       .hero {
-        padding: 8rem 1rem 2rem 1rem;
+        padding: 14rem 1rem 2rem 1rem;
         min-height: 70vh;
         margin-top: 80px;
       }
 
       .hero-content {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 3rem;
         text-align: center;
         grid-template-areas: "logo" "content";
       }
@@ -599,10 +604,13 @@
       .hero-right {
         grid-area: logo;
         order: -1;
+        margin-bottom: 1rem;
       }
 
       .hero h1 {
         font-size: clamp(2rem, 6vw, 3rem);
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
       }
 
       .hero p {
@@ -702,7 +710,7 @@
     @media (max-width: 480px) {
       .hero {
         min-height: 60vh;
-        padding: 7rem 1rem 1.5rem 1rem;
+        padding: 14rem 1rem 1.5rem 1rem;
         margin-top: 80px;
       }
 
@@ -736,6 +744,11 @@
 
       .nav-links {
         font-size: 0.9rem;
+      }
+
+      /* Mobile scroll offset */
+      section[id] {
+        scroll-margin-top: 100px;
       }
     }
 
@@ -793,7 +806,7 @@
   <section class="hero" id="home">
     <div class="hero-content">
       <div class="hero-left">
-        <h1 data-en="Welcome to" data-fr="Bienvenue sur" data-nl="Welkom bij">Welcome to <span class="brand-highlight">BRUIT</span></h1>
+        <h1><span data-en="Welcome to" data-fr="Bienvenue sur" data-nl="Welkom bij">Welcome to</span> <span class="brand-highlight">BRUIT</span></h1>
         <p data-en="Brussels' premier IT community where innovation meets collaboration. Join passionate developers, engineers, and tech enthusiasts shaping the future of technology in the heart of Europe." data-fr="La première communauté IT de Bruxelles où l'innovation rencontre la collaboration. Rejoignez des développeurs, ingénieurs et passionnés de technologie passionnés qui façonnent l'avenir de la technologie au cœur de l'Europe." data-nl="Brussels' toonaangevende IT-gemeenschap waar innovatie samenkomt met samenwerking. Sluit je aan bij gepassioneerde ontwikkelaars, ingenieurs en tech-enthousiastelingen die de toekomst van technologie in het hart van Europa vormgeven.">Brussels' premier IT community where innovation meets collaboration. Join passionate developers, engineers, and tech enthusiasts shaping the future of technology in the heart of Europe.</p>
         <div class="cta-buttons">
           <a href="https://discord.gg/ZzdU8cum" class="btn btn-primary" target="_blank">
